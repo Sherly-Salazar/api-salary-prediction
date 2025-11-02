@@ -1,0 +1,20 @@
+org: sherly01
+service: api-salary-prediction
+
+provider:
+  name: aws
+  runtime: python3.9
+  memorySize: 1024
+  timeout: 20
+  iam:
+    role: arn:aws:iam::453630683778:role/LabRole
+
+functions:
+  listar:
+    handler: SalaryPrediction.lambda_handler
+    events:
+      - http:
+          path: /predecir/sueldo
+          method: post
+          cors: true
+          integration: lambda
